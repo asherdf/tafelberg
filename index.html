@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <title>Tafelberg</title>
+</head>
+<body>
+
+    <!-- top nav -->
+    <section class="nav-top">
+        <!-- Left side -->
+        <h3 class="logo">Logo</h3>
+        
+        <!-- Right side -->
+        <img src="Icons/list.svg" class="hamburger"/>
+
+        <div class="nav-right-side">
+            <h3 class="nav-page-link">Our Story</h3>
+            <h3 class="nav-page-link">Photos</h3>
+            <h3 class="nav-page-link">House Rules & FAQ</h3>
+        </div>
+    </section>
+
+
+    <main>
+        <h1>When do you want to stay with us?</h1>
+        <div>
+
+            <div >
+                <!-- dates -->
+                <form class="arrive-depart">
+                    <div class="entry">
+                        <label for="arrival">Arrive</label>
+                        <input type="date" id="arrival" placeholder="Arrival Date">
+                    </div>
+                    <div class="entry">
+                        <label for="departure">Depart</label>
+                        <input type="date" id="departure" placeholder="Depart Date">
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <!-- number of guests -->
+                <form class="guests-input">
+                    <label for="number-of-guests"># of Guests</label>
+                    <select id="select-number-of-guests"></select>
+                </form>
+            </div>
+
+        </div>
+        <a href="verify.html"><button>Search</button></a>
+        <a href="" id="see-house-rules">See house rules</a>
+    </main>
+
+    <script src="rules.js"></script>
+    <!-- <script type="text/javascript" src="dates.json"></script> -->
+
+</body>
+</html>
