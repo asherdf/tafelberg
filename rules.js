@@ -75,7 +75,7 @@ const dates = [
     "cost": "$75",
     "cabins": {
         "simons": {
-            "status": "occu",
+            "status": "avail",
             "volume": "10"},
         "muiz": {
             "status": "avail",
@@ -87,7 +87,7 @@ const dates = [
     "cost": "$75",
     "cabins": {
         "simons": {
-            "status": "occu",
+            "status": "avail",
             "volume": "10"},
         "muiz": {
             "status": "avail",
@@ -99,7 +99,7 @@ const dates = [
     "cost": "$75",
     "cabins": {
         "simons": {
-            "status": "occu",
+            "status": "avail",
             "volume": "10"},
         "muiz": {
             "status": "avail",
@@ -111,7 +111,7 @@ const dates = [
     "cost": "$75",
     "cabins": {
         "simons": {
-            "status": "occu",
+            "status": "avail",
             "volume": "10"},
         "muiz": {
             "status": "avail",
@@ -234,7 +234,6 @@ const dates = [
 let ham = document.querySelector("#hamburger");
 
 function revealMenu () {
-    console.log("Hamburger was clicked");
     document.getElementById("sideMenu").classList.toggle("sideMenu-translate");
 }
 
@@ -260,6 +259,7 @@ ham.addEventListener("click", revealMenu);
 // 9)   grab the number of guests requested from the DOM
 // 10)   is the number of guests requested <= maximum beds, continue
 
+
 function checkAvailability (event) {
     event.preventDefault();
     
@@ -275,8 +275,6 @@ function checkAvailability (event) {
     let simonsN = 0;  // Days Simon's Town is available
     let muizN = 0;    // Days Muizenberg is available
     let seaPtN = 0;   // Days Sea Point is available
-    let homesAvail = [0, 0, 0];  // Array of available homes
-
 
     // https://stackabuse.com/javascript-get-number-of-days-between-dates
     function getNumberOfDays(start, end) {
@@ -286,37 +284,27 @@ function checkAvailability (event) {
         const diffInTime = date2.getTime() - date1.getTime();
         diffInDays = Math.round(diffInTime / oneDay);
         console.log("Duration:  " + diffInDays);
-        // return diffInDays;
 
         // look through the list of dates to find our start
         for (let i = 0; i <= dates.length; i++) {
-            console.log("1st for...");
 
             // if the date is found, start counting available cabins
             if (dates[i].date === arriveDate) {
-                console.log("Start date found");
 
                 // count all available cabins between arrival and depature
                 for (let i = 0; i < diffInDays; i++) {
-                    console.log("2nd for...");
                     if (dates[i].cabins.simons.status === "avail") {
+                        console.log("in the IF");
                         simonsN++;
-
-                    } if (dates[i].cabins.muiz.status === "avail") {
+                    } 
+                    
+                    if (dates[i].cabins.muiz.status === "avail") {
                         muizN++;
-
-                    } if (dates[i].cabins.seaPt.status === "avail") {
+                    } 
+                    
+                    if (dates[i].cabins.seaPt.status === "avail") {
                         seaPtN++;
-                        // return seaPtN;
-                    }
-
-                    // let homesAvail = [simonsN, muizN, seaPtN]
-                    
-                    if (i === diffInDays) {
-                        // return homesAvail;
-                    }
-                    // console.log(homesAvail);
-                    
+                    }                    
                 } 
                
                 // show how long each cabin is available
@@ -324,67 +312,65 @@ function checkAvailability (event) {
                 console.log("Muiz:  " + muizN);
                 console.log("SeaPt:  " + seaPtN);
 
-                // return homesAvail;
                 break;
-
-
-
             }
-            // console.log("Can we get here?");
         }
-
-        console.log("Simons is:  " + simonsN);
 
         // check if any cabin is available for long enough
         if (simonsN >= diffInDays || muizN >= diffInDays || seaPtN >= diffInDays) {
-            console.log("We have enough days")
+            checkCapacity();
+        } else {
+            console.log("Sorry, we don't have anything available for those dates.")
         }
-
-            // check if we have enough room for our number of guests
-            console.log("Total guests staying:  " + guestAmount);
-
-            
-
-
     }
 
     
     
     getNumberOfDays(arriveDate, departDate);
-    checkCapacity ();
+    // checkCapacity();
     
     function checkCapacity () {
+
         let availableCapacity = 0;
 
-            if (simonsN < 0 && muizN < 0 && seaPtN < 0) {
-                availableCapacity = 0;
-                
-                console.log("We don't have room  " + availableCapacity);
-            }
-             if (simonsN > 0 && muizN > 0 && seaPtN > 0) {
-                availableCapacity = 30;
-                console.log("Our Availcapity  " + availableCapacity);
-            }  if ((simonsN > 0 && muizN > 0 && seaPtN < 0) || (simonsN > 0 && muizN < 0 && seaPtN > 0) || (simonsN < 0 && muizN > 0 && seaPtN > 0)) {
-                availableCapacity = 20;
-                console.log("Our Availcapity  " + availableCapacity);
-            }  if ((simonsN > 0 && muizN < 0 && seaPtN < 0) || (simonsN < 0 && muizN < 0 && seaPtN > 0) || (simonsN < 0 && muizN > 0 && seaPtN < 0)) {
-                availableCapacity = 10;
-                console.log("Our Availcapity  " + availableCapacity);
-            }
+        // nothing is available
+        if (simonsN <= 0 && muizN <= 0 && seaPtN <= 0) {
+            availableCapacity = 0;
+            console.log("We don't have room  " + availableCapacity);
+        }
+
+        // all are available
+        if ((simonsN > 0) && (muizN > 0) && (seaPtN > 0)) {
+            availableCapacity = 30;
+            console.log("Our capacity is  " + availableCapacity);
+        }  
+
+        // any 2 are available
+        if ((simonsN > 0 && muizN > 0 && seaPtN <= 0) || (simonsN > 0 && muizN <= 0 && seaPtN > 0) || (simonsN <= 0 && muizN > 0 && seaPtN > 0)) {
+            availableCapacity = 20;
+            console.log("Our capacity is  " + availableCapacity);
+        }  
+        
+        // only 1 is available
+        if ((simonsN > 0 && muizN <= 0 && seaPtN <= 0) || (simonsN <= 0 && muizN <= 0 && seaPtN > 0) || (simonsN <= 0 && muizN > 0 && seaPtN <= 0)) {
+            availableCapacity = 10;
+            console.log("Our capacity is  " + availableCapacity);
+        }
+
+        // compare the available capacity to the guests' demand
+        if (availableCapacity >= guestAmount) {
+            console.log("Total guests staying:  " + guestAmount);
+            console.log("YAY! We have enough room");
+        } else {
+            console.log("Sorry, we don't have enough space");
+        }
     }
 
-    
-    
-    // findCabins();
+    console.log(availableCapacity);
 
 };
 
 document.querySelector("#dates-and-guests").addEventListener("submit", checkAvailability);
-
-
-
-
-
 
 
 // 1)   Grab the correct element by its ID
@@ -401,23 +387,4 @@ for (let i=1; i<=30; i++) {
     guestOption.appendChild(newOption);
 }
 
-
-
 console.log(dates);
-
-
-
-
-
-// let ham = document.querySelector("#hamburger");
-
-// function revealMenu () {
-//     console.log("Hamburger was clicked");
-//     document.getElementById("sideMenu").classList.toggle("sideMenu-translate");
-// }
-
-// ham.addEventListener("click", revealMenu);
-
-
-
-
