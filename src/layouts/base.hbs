@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    {{#block "title"}}
+        <title>Tafelberg</title>
+    {{/block}}
+</head>
+<body>
+    {{#block "nav"}}
+        <!-- top nav -->
+        <section class="nav-top">
+            <!-- Left side -->
+            <h3 class="logo">
+                <a href="index.html" id="logo">Tafelberg</a>
+            </h3>
+            
+            <!-- Right side -->
+            <div class="menu-button">
+                <img src="Icons/list.svg" id="hamburger"/>
+            </div>
+
+            <div class="nav-right-side">
+                <h3 class="nav-page-link">
+                    <a href="our-story.html">Our Story</a>
+                </h3>
+                <h3 class="nav-page-link">
+                    <a href="ammenities.html">Ammenities</a>
+                </h3>
+                <h3 class="nav-page-link">
+                    <a href="photos.html">Photos</a>
+                </h3>
+                <h3 class="nav-page-link">
+                    <a href="faq.html">House Rules & FAQ</a>
+                </h3>
+            </div>
+        </section>
+
+        <aside class="sideMenu-style sideMenu-position" id="sideMenu">
+            <ul class="menuTable">
+                <li>
+                    <a href="ammenities.html">Ammenities</a>
+                </li>
+                <li>
+                    <a href="photos.html">Photos</a>
+                </li>
+                <li>
+                    <a href="our-story.html">Our Story</a>
+                </li>
+                <li>
+                    <a href="faq.html">House Rules & FAQ</a>
+                </li>
+            </ul>
+        </aside>
+    {{/block}}
+
+    {{#block "content"}}
+        <main>
+            <img src="Images/bay.jpg" id="background-image">
+            <h1>When do you want to stay with us?</h1>
+            <div>
+                <form class="inputs" id="dates-and-guests">
+                    <div class="arrive-depart">
+                        <!-- dates -->
+                        
+                            <div class="entry">
+                                <label for="arrival">Arrive</label>
+                                <input type="date" id="arrival" name="arrival" placeholder="Arrival Date">
+                            </div>
+                            <div class="entry">
+                                <label for="departure">Depart</label>
+                                <input type="date" id="departure" name="departure" placeholder="Depart Date">
+                            </div>
+                        <!-- </form> -->
+                    </div>
+
+                    <div class="guests-input">
+                        <!-- number of guests -->
+                        <!-- <form > -->
+                            <label for="number-of-guests"># of Guests</label>
+                            <select id="select-number-of-guests"></select>
+                        <!-- </form> -->
+                    </div>
+                    <input type="submit" value="Search" class="button-primary">
+                </form>
+
+            </div>
+            <!-- <a href="verify.html"><button>Search</button></a> -->
+            <a href="faq.html" id="see-house-rules">See house rules</a>
+        </main>
+
+        <script src="rules.js"></script>
+        <!-- <script type="text/javascript" src="dates.json"></script> -->
+    {{/block}}
+</body>
+</html>
