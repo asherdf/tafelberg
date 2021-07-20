@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-html": "node compile.js && cp src/*.js public/.",
+    "copy-css": "cp -r src/*.css public/",
+    "copy-js": "cp src/*.js public/",
+    "copy-Image": "cp -r src/Images public/Images",
+    "copy-Icon": "cp -r src/Icons public/Icons",
+    "build": "npm run build-html && npm run copy-css && npm run copy-js && npm run copy-Image && npm run copy-Icon"
   },
   "repository": {
     "type": "git",
@@ -17,6 +22,9 @@
   },
   "homepage": "https://github.com/asherdf/asherdf.github.io#readme",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.10"
+  },
+  "devDependencies": {
     "handlebars": "^4.7.7",
     "handlebars-layouts": "^3.1.4"
   }
