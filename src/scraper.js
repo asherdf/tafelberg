@@ -1,41 +1,7 @@
-const functions = require("firebase-functions");
-const fetch = require("node-fetch");
-const express = require("express");
-const cors = require("cors");
 const cheerio = require("cheerio");
 
 
-const app = express();
-app.use(cors({origin: true}));
-
-
-app.get("/", async (req, res) => {
-    // return list of property endpoints
-    const data = {
-        "properties": [
-            {
-                name: "Sea Point",
-                endpoint: "/seapoint",
-            },
-            {
-                name: "Muizenberg",
-                endpoint: "/muizenberg",
-            },
-            {
-                name: "Simons Town",
-                endpoint: "/simonstown",
-            },
-            {
-                name: "Pier Heaven",
-                endpoint: "/pierheaven",
-            },
-        ],
-    };
-    res.status(200).send(data);
-});
-
-
-app.get("/seapoint", async (req, res) => {
+const get_seapoint = async() => {
     // Get availability of Sea Point property
     const resp = await scrapeUrl("https://www.rockportescape.com/rockport-vacation-rentals/sea-point");
     // Parse the html responses
@@ -45,11 +11,11 @@ app.get("/seapoint", async (req, res) => {
         updatedAt: Date.now(),
         dates: dates,
     };
-    res.status(200).send(data);
-});
+    return data;
+};
 
 
-app.get("/muizenberg", async (req, res) => {
+const get_muizenberg = async() => {
     // Get availability of Muizenberg property
     const resp = await scrapeUrl("https://www.rockportescape.com/rockport-vacation-rentals/muizenberg-6031rpb");
     // Parse the html responses
@@ -59,11 +25,11 @@ app.get("/muizenberg", async (req, res) => {
         updatedAt: Date.now(),
         dates: dates,
     };
-    res.status(200).send(data);
-});
+    return data;
+};
 
 
-app.get("/simonstown", async (req, res) => {
+const get_simonstown = async() => {
     // Get availability of Simons Town property
     const resp = await scrapeUrl("https://www.rockportescape.com/rockport-vacation-rentals/simons-town-6031rpc");
     // Parse the html responses
@@ -73,11 +39,11 @@ app.get("/simonstown", async (req, res) => {
         updatedAt: Date.now(),
         dates: dates,
     };
-    res.status(200).send(data);
-});
+    return data;
+};
 
 
-app.get("/pierheaven", async (req, res) => {
+const get_pierheaven = async() => {
     // Get availability of Pier Heaven property
     const resp = await scrapeUrl("https://www.rockportescape.com/rockport-vacation-rentals/pier-heaven-6031abc");
     // Parse the html responses
@@ -87,8 +53,8 @@ app.get("/pierheaven", async (req, res) => {
         updatedAt: Date.now(),
         dates: dates,
     };
-    res.status(200).send(data);
-});
+    return data;
+};
 
 
 const parseHtmlByDate = (html) => {
@@ -154,5 +120,3 @@ const scrapeUrl = async (url) => {
         console.log(err);
     }
 };
-
-exports.properties = functions.https.onRequest(app);
