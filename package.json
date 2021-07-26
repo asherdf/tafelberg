@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/asherdf/asherdf.github.io.git"
+    "url": "git+https://github.com/asherdf/tafelberg.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/asherdf/asherdf.github.io/issues"
+    "url": "https://github.com/asherdf/tafelberg/issues"
   },
-  "homepage": "https://github.com/asherdf/asherdf.github.io#readme",
+  "homepage": "https://github.com/asherdf/tafelberg#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.10"
   },
