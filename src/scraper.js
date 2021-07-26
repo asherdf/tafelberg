@@ -39,6 +39,7 @@ const get_simonstown = async() => {
         updatedAt: Date.now(),
         dates: dates,
     };
+    console.log(data);
     return data;
 };
 
