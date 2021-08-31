@@ -1,236 +1,3 @@
-const dates = [
-    {"date": "2021-07-13",
-     "cost": "$75",
-     "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-14",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-15",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-16",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-17",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-18",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-19",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "avail",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-20",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "avail",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-21",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "avail",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-22",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "avail",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-23",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-24",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-25",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-26",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-27",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-28",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-29",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-30",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-    {"date": "2021-07-31",
-    "cost": "$75",
-    "cabins": {
-        "simons": {
-            "status": "occu",
-            "volume": "10"},
-        "muiz": {
-            "status": "avail",
-            "volume": "10"},
-        "seaPt": {
-            "status": "avail",
-            "volume": "10"}}},
-];
-
-
-
 let ham = document.querySelector("#hamburger");
 
 function revealMenu () {
@@ -260,8 +27,36 @@ ham.addEventListener("click", revealMenu);
 // 10)   is the number of guests requested <= maximum beds, continue
 
 
-function checkAvailability (event) {
+
+
+async function getAvailability () {
+    const response = await fetch('https://tafelberg-api.samtx.dev/availability');
+    const data = await response.json();
+    // console.log(data);
+    return data
+}
+
+
+function getNumberOfDays(start, end) {
+    // https://stackabuse.com/javascript-get-number-of-days-between-dates
+    const date1 = new Date(start);
+    const date2 = new Date(end);
+    const oneDay = 1000 * 60 * 60 * 24;
+    const diffInTime = date2.getTime() - date1.getTime();
+    diffInDays = Math.round(diffInTime / oneDay);
+    return diffInDays;
+
+
+function getDaysBetween(start, end){
+    // return array of strings representing dates between start and end, inclusive
+};
+
+
+async function checkAvailability (event) {
     event.preventDefault();
+    
+    const dates = await getAvailability();
+    console.log(dates);
     
     let arriveDate = document.querySelector('input[name="arrival"]').value;
     console.log("Arrival date:  " + arriveDate);
@@ -276,53 +71,56 @@ function checkAvailability (event) {
     let muizN = 0;    // Days Muizenberg is available
     let seaPtN = 0;   // Days Sea Point is available
 
-    // https://stackabuse.com/javascript-get-number-of-days-between-dates
-    function getNumberOfDays(start, end) {
-        const date1 = new Date(start);
-        const date2 = new Date(end);
-        const oneDay = 1000 * 60 * 60 * 24;
-        const diffInTime = date2.getTime() - date1.getTime();
-        diffInDays = Math.round(diffInTime / oneDay);
-        console.log("Duration:  " + diffInDays);
+    diffInDays = getNumberOfDays(start, end);
+    console.log("Duration:  " + diffInDays);
 
-        // look through the list of dates to find our start
-        for (let i = 0; i <= dates.length; i++) {
+    /*
+    arriveDate = '2021-08-01'
+    departDate = '2021-08-07'
 
-            // if the date is found, start counting available cabins
-            if (dates[i].date === arriveDate) {
+    daysBetween = ['2021-08-01', '2021-08-02', '2021-08-03', '2021-08-04', '2021-08-05']
 
-                // count all available cabins between arrival and depature
-                for (let i = 0; i < diffInDays; i++) {
-                    if (dates[i].cabins.simons.status === "avail") {
-                        console.log("in the IF");
-                        simonsN++;
-                    } 
-                    
-                    if (dates[i].cabins.muiz.status === "avail") {
-                        muizN++;
-                    } 
-                    
-                    if (dates[i].cabins.seaPt.status === "avail") {
-                        seaPtN++;
-                    }                    
-                } 
-               
-                // show how long each cabin is available
-                console.log("Simons:  " + simonsN);
-                console.log("Muiz:  " + muizN);
-                console.log("SeaPt:  " + seaPtN);
-
-                break;
+    {
+        "availability":{
+            "2021-08-01":{
+                "muizenberg":{
+                    "property_slug":"muizenberg",
+                    "available":false,
+                    "price":null
+                },
+                "sea-point":{
+                    "property_slug":"sea-point",
+                    "available":false,
+                    "price":null
+                },
+                "simons-town":{
+                    "property_slug":"simons-town",
+                    "available":false,
+                    "price":null
+                },
+                "pier-heaven":{
+                    "property_slug":"pier-heaven",
+                    "available":false,
+                    "price":null
+                }
+            },
+            "2021-08-02":{...
             }
         }
-
-        // check if any cabin is available for long enough
-        if (simonsN >= diffInDays || muizN >= diffInDays || seaPtN >= diffInDays) {
-            checkCapacity();
-        } else {
-            console.log("Sorry, we don't have anything available for those dates.")
-        }
     }
+                
+    write function to get the daysdaysBetween(start, end)
+
+    */
+    let daysBetween = getDaysBetween(start, end);
+
+    // check if any cabin is available for long enough
+    if (simonsN >= diffInDays || muizN >= diffInDays || seaPtN >= diffInDays) {
+        checkCapacity();
+    } else {
+        console.log("Sorry, we don't have anything available for those dates.")
+    }
+}
 
     
     
@@ -366,7 +164,7 @@ function checkAvailability (event) {
         }
     }
 
-    console.log(availableCapacity);
+    // console.log(availableCapacity);
 
 };
 
@@ -387,4 +185,33 @@ for (let i=1; i<=30; i++) {
     guestOption.appendChild(newOption);
 }
 
-console.log(dates);
+// console.log(dates);
+
+
+// look through the list of dates to find our start
+for (let i = 0; i <= dates.length; i++) {
+    // if the date is found, start counting available cabins
+    if (dates[i].date === arriveDate) {
+        // count all available cabins between arrival and depature
+        for (let i = 0; i < diffInDays; i++) {
+            if (dates[i].cabins.simons.status === "avail") {
+                simonsN++;
+            } 
+            
+            if (dates[i].cabins.muiz.status === "avail") {
+                muizN++;
+            } 
+            
+            if (dates[i].cabins.seaPt.status === "avail") {
+                seaPtN++;
+            }                    
+        } 
+        
+        // show how long each cabin is available
+        console.log("Simons:  " + simonsN);
+        console.log("Muiz:  " + muizN);
+        console.log("SeaPt:  " + seaPtN);
+
+        break;
+    }
+}
