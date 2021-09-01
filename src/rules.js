@@ -1,3 +1,5 @@
+import { add } from 'date-fns';
+
 let ham = document.querySelector("#hamburger");
 
 function revealMenu () {
@@ -49,15 +51,18 @@ function getNumberOfDays(start, end) {
 
 function getDaysBetween(start, end){
     // return array of strings representing dates between start and end, inclusive
+    // 2022-02-28, 2022-03-01
+
+    // 2024-02-28, 2024-02-29
 };
 
 
 async function checkAvailability (event) {
     event.preventDefault();
-    
+
     const dates = await getAvailability();
     console.log(dates);
-    
+
     let arriveDate = document.querySelector('input[name="arrival"]').value;
     console.log("Arrival date:  " + arriveDate);
 
@@ -108,7 +113,7 @@ async function checkAvailability (event) {
             }
         }
     }
-                
+
     write function to get the daysdaysBetween(start, end)
 
     */
@@ -122,11 +127,11 @@ async function checkAvailability (event) {
     }
 }
 
-    
-    
+
+
     getNumberOfDays(arriveDate, departDate);
     // checkCapacity();
-    
+
     function checkCapacity () {
 
         let availableCapacity = 0;
@@ -141,14 +146,14 @@ async function checkAvailability (event) {
         if ((simonsN > 0) && (muizN > 0) && (seaPtN > 0)) {
             availableCapacity = 30;
             console.log("Our capacity is  " + availableCapacity);
-        }  
+        }
 
         // any 2 are available
         if ((simonsN > 0 && muizN > 0 && seaPtN <= 0) || (simonsN > 0 && muizN <= 0 && seaPtN > 0) || (simonsN <= 0 && muizN > 0 && seaPtN > 0)) {
             availableCapacity = 20;
             console.log("Our capacity is  " + availableCapacity);
-        }  
-        
+        }
+
         // only 1 is available
         if ((simonsN > 0 && muizN <= 0 && seaPtN <= 0) || (simonsN <= 0 && muizN <= 0 && seaPtN > 0) || (simonsN <= 0 && muizN > 0 && seaPtN <= 0)) {
             availableCapacity = 10;
@@ -196,17 +201,17 @@ for (let i = 0; i <= dates.length; i++) {
         for (let i = 0; i < diffInDays; i++) {
             if (dates[i].cabins.simons.status === "avail") {
                 simonsN++;
-            } 
-            
+            }
+
             if (dates[i].cabins.muiz.status === "avail") {
                 muizN++;
-            } 
-            
+            }
+
             if (dates[i].cabins.seaPt.status === "avail") {
                 seaPtN++;
-            }                    
-        } 
-        
+            }
+        }
+
         // show how long each cabin is available
         console.log("Simons:  " + simonsN);
         console.log("Muiz:  " + muizN);
