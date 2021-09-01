@@ -1,4 +1,4 @@
-import { add } from 'date-fns';
+import { eachDayOfInterval  } from 'date-fns';
 
 let ham = document.querySelector("#hamburger");
 
@@ -7,9 +7,6 @@ function revealMenu () {
 }
 
 ham.addEventListener("click", revealMenu);
-
-
-
 
 // 1)   grab the value from the Arrival Date
 // 2)   grab the value from the Departure Date
@@ -27,8 +24,6 @@ ham.addEventListener("click", revealMenu);
 // 8.3)   save this value as a variable for maximum beds
 // 9)   grab the number of guests requested from the DOM
 // 10)   is the number of guests requested <= maximum beds, continue
-
-
 
 
 async function getAvailability () {
@@ -49,11 +44,11 @@ function getNumberOfDays(start, end) {
     return diffInDays;
 
 
-function getDaysBetween(start, end){
+function getDaysBetween(startDate, endDate){
     // return array of strings representing dates between start and end, inclusive
-    // 2022-02-28, 2022-03-01
-
-    // 2024-02-28, 2024-02-29
+    const result = eachDayOfInterval({ start: startDate, end: endDate });
+    console.log(result);
+    return result;
 };
 
 
@@ -76,7 +71,7 @@ async function checkAvailability (event) {
     let muizN = 0;    // Days Muizenberg is available
     let seaPtN = 0;   // Days Sea Point is available
 
-    diffInDays = getNumberOfDays(start, end);
+    diffInDays = getNumberOfDays(new Date(arriveDate), new Date(departDate));
     console.log("Duration:  " + diffInDays);
 
     /*
@@ -173,7 +168,24 @@ async function checkAvailability (event) {
 
 };
 
-document.querySelector("#dates-and-guests").addEventListener("submit", checkAvailability);
+document.querySelector("#dates-and-guests").addEventListener("submit", async(event) => {
+    event.preventDefault();
+    const dates = await getAvailability();
+    console.log(dates);
+    let arriveDate = document.querySelector('input[name="arrival"]').value;
+    console.log("Arrival date:  " + arriveDate);
+    let departDate = document.querySelector('input[name="departure"]').value;
+    console.log("Departure date:  " + departDate);
+    let guestAmount = document.querySelector("#select-number-of-guests").value;
+    let diffInDays;   // Duration of the guest is staying
+    let simonsN = 0;  // Days Simon's Town is available
+    let muizN = 0;    // Days Muizenberg is available
+    let seaPtN = 0;   // Days Sea Point is available
+    diffInDays = getNumberOfDays(new Date(arriveDate), new Date(departDate));
+    let daysBetween = getDaysBetween(new Date(arriveDate), new Date(departDate));
+    console.log("Duration:  " + diffInDays);
+    }
+);
 
 
 // 1)   Grab the correct element by its ID

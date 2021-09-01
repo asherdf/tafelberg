@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build-html": "node compile.js && cp src/*.js public/.",
+    "build-js": "rollup -c",
     "copy-css": "cp -r src/*.css public/",
     "copy-js": "cp src/*.js public/",
     "copy-Image": "cp -r src/Images public/Images",
     "copy-Icon": "cp -r src/Icons public/Icons",
-    "build": "npm run build-html && npm run copy-css && npm run copy-js && npm run copy-Image && npm run copy-Icon"
+    "build": "npm run build-html && npm run build-js && npm run copy-css && npm run copy-js && npm run copy-Image && npm run copy-Icon"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,12 @@
     "date-fns": "^2.23.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
     "handlebars": "^4.7.7",
-    "handlebars-layouts": "^3.1.4"
+    "handlebars-layouts": "^3.1.4",
+    "rollup": "^2.56.3",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }
