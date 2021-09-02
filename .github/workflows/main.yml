@@ -29,5 +29,5 @@ jobs:
     - name: Add known host
       run: ssh-keyscan -H ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
     - name: Deploy to server with rsync
-      run: rsync -vzr public/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_PATH }}
+      run: rsync -vzr --delete public/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_PATH }}
 
