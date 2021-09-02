@@ -34,17 +34,16 @@ async function getAvailability () {
 }
 
 
-function getNumberOfDays(start, end) {
+function getNumberOfDays(startDate, endDate) {
     // https://stackabuse.com/javascript-get-number-of-days-between-dates
-    const date1 = new Date(start);
-    const date2 = new Date(end);
     const oneDay = 1000 * 60 * 60 * 24;
-    const diffInTime = date2.getTime() - date1.getTime();
+    const diffInTime = startDate.getTime() - endDate.getTime();
     diffInDays = Math.round(diffInTime / oneDay);
     return diffInDays;
+}
 
 
-function getDaysBetween(startDate, endDate){
+function getDaysBetween(startDate, endDate) {
     // return array of strings representing dates between start and end, inclusive
     const result = eachDayOfInterval({ start: startDate, end: endDate });
     console.log(result);
@@ -202,27 +201,24 @@ for (let i=1; i<=30; i++) {
     guestOption.appendChild(newOption);
 }
 
-// console.log(dates);
-
-
-// look through the list of dates to find our start
-for (let i = 0; i <= dates.length; i++) {
-    // if the date is found, start counting available cabins
-    if (dates[i].date === arriveDate) {
-        // count all available cabins between arrival and depature
-        for (let i = 0; i < diffInDays; i++) {
-            if (dates[i].cabins.simons.status === "avail") {
-                simonsN++;
-            }
-
-            if (dates[i].cabins.muiz.status === "avail") {
-                muizN++;
-            }
-
-            if (dates[i].cabins.seaPt.status === "avail") {
-                seaPtN++;
-            }
+const dateSubmitButton = document.querySelector("#dates-and-guests");
+if (dateSubmitButton) {
+    dateSubmitButton.addEventListener("submit", async(event) => {
+        event.preventDefault();
+        let arriveDate = document.querySelector('input[name="arrival"]').value;
+        console.log("Arrival date:  " + arriveDate);
+        let departDate = document.querySelector('input[name="departure"]').value;
+        console.log("Departure date:  " + departDate);
+        let guestAmount = document.querySelector("#select-number-of-guests").value;
+        let diffInDays = getNumberOfDays(new Date(arriveDate), new Date(departDate));
+        let daysBetween = getDaysBetween(new Date(arriveDate), new Date(departDate));
+        console.log("Duration:  " + diffInDays);
+        console.log(daysBetween);
+        const dates = await getAvailability();
+        console.log(dates);
         }
+    );
+}
 
         // show how long each cabin is available
         console.log("Simons:  " + simonsN);
