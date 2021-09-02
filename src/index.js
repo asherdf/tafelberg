@@ -37,7 +37,7 @@ async function getAvailability () {
 function getNumberOfDays(startDate, endDate) {
     // https://stackabuse.com/javascript-get-number-of-days-between-dates
     const oneDay = 1000 * 60 * 60 * 24;
-    const diffInTime = startDate.getTime() - endDate.getTime();
+    const diffInTime = endDate.getTime() - startDate.getTime();
     diffInDays = Math.round(diffInTime / oneDay);
     return diffInDays;
 }
