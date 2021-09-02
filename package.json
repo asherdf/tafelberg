@@ -4,13 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-html": "node compile.js && cp src/*.js public/.",
+    "build-html": "node compile.js",
     "build-js": "rollup -c",
     "copy-css": "cp -r src/*.css public/",
-    "copy-js": "cp src/*.js public/",
     "copy-Image": "cp -r src/Images public/Images",
     "copy-Icon": "cp -r src/Icons public/Icons",
-    "build": "npm run build-html && npm run build-js && npm run copy-css && npm run copy-js && npm run copy-Image && npm run copy-Icon"
+    "watch:build-html": "nodemon --watch src/ -e hbs -x \"npm run build-html\"",
+    "watch:build-js": "nodemon --watch src/ -e js -x \"npm run build-js\"",
+    "watch:copy-css": "nodemon --watch src/ -e css -x \"npm run copy-css\"",
+    "watch:copy-Image": "nodemon --watch src/Images -x \"npm run copy-Image\"",
+    "watch:copy-Icon": "nodemon --watch src/Icons -x \"npm run copy-Icon\"",
+    "clean": "rimraf public/*",
+    "dev": "npm run watch:build-html & npm run watch:build-js & npm run watch:copy-css & npm run watch:copy-Image & npm run watch:copy-Icon",
+    "build": "npm run clean && npm run build-html && npm run build-js && npm run copy-css && npm run copy-Image && npm run copy-Icon"
   },
   "repository": {
     "type": "git",
@@ -32,6 +38,8 @@
     "@rollup/plugin-node-resolve": "^13.0.4",
     "handlebars": "^4.7.7",
     "handlebars-layouts": "^3.1.4",
+    "nodemon": "^2.0.12",
+    "rimraf": "^3.0.2",
     "rollup": "^2.56.3",
     "rollup-plugin-terser": "^7.0.2"
   }
