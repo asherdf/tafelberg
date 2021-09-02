@@ -1,6 +1,6 @@
-import { eachDayOfInterval  } from 'date-fns';
+import { eachDayOfInterval } from 'date-fns';
 
-let ham = document.querySelector("#hamburger");
+const ham = document.querySelector("#hamburger");
 
 function revealMenu () {
     document.getElementById("sideMenu").classList.toggle("sideMenu-translate");
@@ -27,9 +27,9 @@ ham.addEventListener("click", revealMenu);
 
 
 async function getAvailability () {
+    // Query backend api to find current availability of rental properties
     const response = await fetch('https://tafelberg-api.samtx.dev/availability');
     const data = await response.json();
-    // console.log(data);
     return data
 }
 
@@ -48,70 +48,61 @@ function getDaysBetween(startDate, endDate) {
     const result = eachDayOfInterval({ start: startDate, end: endDate });
     console.log(result);
     return result;
-};
+}
+
+
+function checkCapacity () {
+    let availableCapacity = 0;
+    // nothing is available
+    if (simonsN <= 0 && muizN <= 0 && seaPtN <= 0) {
+        availableCapacity = 0;
+        console.log("We don't have room  " + availableCapacity);
+    }
+    // all are available
+    if ((simonsN > 0) && (muizN > 0) && (seaPtN > 0)) {
+        availableCapacity = 30;
+        console.log("Our capacity is  " + availableCapacity);
+    }
+    // any 2 are available
+    if ((simonsN > 0 && muizN > 0 && seaPtN <= 0) || (simonsN > 0 && muizN <= 0 && seaPtN > 0) || (simonsN <= 0 && muizN > 0 && seaPtN > 0)) {
+        availableCapacity = 20;
+        console.log("Our capacity is  " + availableCapacity);
+    }
+    // only 1 is available
+    if ((simonsN > 0 && muizN <= 0 && seaPtN <= 0) || (simonsN <= 0 && muizN <= 0 && seaPtN > 0) || (simonsN <= 0 && muizN > 0 && seaPtN <= 0)) {
+        availableCapacity = 10;
+        console.log("Our capacity is  " + availableCapacity);
+    }
+    // compare the available capacity to the guests' demand
+    if (availableCapacity >= guestAmount) {
+        console.log("Total guests staying:  " + guestAmount);
+        console.log("YAY! We have enough room");
+    } else {
+        console.log("Sorry, we don't have enough space");
+    }
+}
 
 
 async function checkAvailability (event) {
     event.preventDefault();
-
+    //  Show loading spinner
     const dates = await getAvailability();
-    console.log(dates);
+    const arriveDate = new Date(document.querySelector('input[name="arrival"]').value);
+    const departDate = new Date(document.querySelector('input[name="departure"]').value);
+    const guestAmount = document.querySelector("#select-number-of-guests").value;
+    const daysBetween = getDaysBetween(arriveDate, departDate);
 
-    let arriveDate = document.querySelector('input[name="arrival"]').value;
-    console.log("Arrival date:  " + arriveDate);
+    // Duration of the guest is staying
+    const diffInDays = getNumberOfDays(arriveDate, departDate);
 
-    let departDate = document.querySelector('input[name="departure"]').value;
-    console.log("Departure date:  " + departDate);
-
-    let guestAmount = document.querySelector("#select-number-of-guests").value;
-
-    let diffInDays;   // Duration of the guest is staying
     let simonsN = 0;  // Days Simon's Town is available
     let muizN = 0;    // Days Muizenberg is available
     let seaPtN = 0;   // Days Sea Point is available
 
-    diffInDays = getNumberOfDays(new Date(arriveDate), new Date(departDate));
+    console.log(dates);
+    console.log("Arrival date:  " + arriveDate);
+    console.log("Departure date:  " + departDate);
     console.log("Duration:  " + diffInDays);
-
-    /*
-    arriveDate = '2021-08-01'
-    departDate = '2021-08-07'
-
-    daysBetween = ['2021-08-01', '2021-08-02', '2021-08-03', '2021-08-04', '2021-08-05']
-
-    {
-        "availability":{
-            "2021-08-01":{
-                "muizenberg":{
-                    "property_slug":"muizenberg",
-                    "available":false,
-                    "price":null
-                },
-                "sea-point":{
-                    "property_slug":"sea-point",
-                    "available":false,
-                    "price":null
-                },
-                "simons-town":{
-                    "property_slug":"simons-town",
-                    "available":false,
-                    "price":null
-                },
-                "pier-heaven":{
-                    "property_slug":"pier-heaven",
-                    "available":false,
-                    "price":null
-                }
-            },
-            "2021-08-02":{...
-            }
-        }
-    }
-
-    write function to get the daysdaysBetween(start, end)
-
-    */
-    let daysBetween = getDaysBetween(start, end);
 
     // check if any cabin is available for long enough
     if (simonsN >= diffInDays || muizN >= diffInDays || seaPtN >= diffInDays) {
@@ -119,97 +110,11 @@ async function checkAvailability (event) {
     } else {
         console.log("Sorry, we don't have anything available for those dates.")
     }
+    // Remove loading spinner
 }
 
-
-
-    getNumberOfDays(arriveDate, departDate);
-    // checkCapacity();
-
-    function checkCapacity () {
-
-        let availableCapacity = 0;
-
-        // nothing is available
-        if (simonsN <= 0 && muizN <= 0 && seaPtN <= 0) {
-            availableCapacity = 0;
-            console.log("We don't have room  " + availableCapacity);
-        }
-
-        // all are available
-        if ((simonsN > 0) && (muizN > 0) && (seaPtN > 0)) {
-            availableCapacity = 30;
-            console.log("Our capacity is  " + availableCapacity);
-        }
-
-        // any 2 are available
-        if ((simonsN > 0 && muizN > 0 && seaPtN <= 0) || (simonsN > 0 && muizN <= 0 && seaPtN > 0) || (simonsN <= 0 && muizN > 0 && seaPtN > 0)) {
-            availableCapacity = 20;
-            console.log("Our capacity is  " + availableCapacity);
-        }
-
-        // only 1 is available
-        if ((simonsN > 0 && muizN <= 0 && seaPtN <= 0) || (simonsN <= 0 && muizN <= 0 && seaPtN > 0) || (simonsN <= 0 && muizN > 0 && seaPtN <= 0)) {
-            availableCapacity = 10;
-            console.log("Our capacity is  " + availableCapacity);
-        }
-
-        // compare the available capacity to the guests' demand
-        if (availableCapacity >= guestAmount) {
-            console.log("Total guests staying:  " + guestAmount);
-            console.log("YAY! We have enough room");
-        } else {
-            console.log("Sorry, we don't have enough space");
-        }
-    }
-
-    // console.log(availableCapacity);
-
-};
-
-document.querySelector("#dates-and-guests").addEventListener("submit", async(event) => {
-    event.preventDefault();
-    const dates = await getAvailability();
-    console.log(dates);
-    let arriveDate = document.querySelector('input[name="arrival"]').value;
-    console.log("Arrival date:  " + arriveDate);
-    let departDate = document.querySelector('input[name="departure"]').value;
-    console.log("Departure date:  " + departDate);
-    let guestAmount = document.querySelector("#select-number-of-guests").value;
-    let diffInDays;   // Duration of the guest is staying
-    let simonsN = 0;  // Days Simon's Town is available
-    let muizN = 0;    // Days Muizenberg is available
-    let seaPtN = 0;   // Days Sea Point is available
-    diffInDays = getNumberOfDays(new Date(arriveDate), new Date(departDate));
-    let daysBetween = getDaysBetween(new Date(arriveDate), new Date(departDate));
-    console.log("Duration:  " + diffInDays);
-    }
-}
 
 const dateSubmitButton = document.querySelector("#dates-and-guests");
 if (dateSubmitButton) {
-    dateSubmitButton.addEventListener("submit", async(event) => {
-        event.preventDefault();
-        let arriveDate = document.querySelector('input[name="arrival"]').value;
-        console.log("Arrival date:  " + arriveDate);
-        let departDate = document.querySelector('input[name="departure"]').value;
-        console.log("Departure date:  " + departDate);
-        let guestAmount = document.querySelector("#select-number-of-guests").value;
-        let diffInDays = getNumberOfDays(new Date(arriveDate), new Date(departDate));
-        let daysBetween = getDaysBetween(new Date(arriveDate), new Date(departDate));
-        console.log("Duration:  " + diffInDays);
-        console.log(daysBetween);
-        const dates = await getAvailability();
-        console.log(dates);
-        }
-    );
-}
-
-        // show how long each cabin is available
-        console.log("Simons:  " + simonsN);
-        console.log("Muiz:  " + muizN);
-        console.log("SeaPt:  " + seaPtN);
-
-        break;
-    }
+    dateSubmitButton.addEventListener("submit", checkAvailability);
 }
