@@ -16,7 +16,7 @@
     "watch:copy-Icon": "nodemon --watch src/Icons -x \"npm run copy-Icon\"",
     "clean": "rimraf public/*",
     "dev": "npm run watch:build-html & npm run watch:build-js & npm run watch:copy-css & npm run watch:copy-Image & npm run watch:copy-Icon",
-    "build": "npm run clean && npm run build-html && npm run build-js && npm run copy-css && npm run copy-Image && npm run copy-Icon"
+    "build": "npm run clean && npm run build-html && NODE_ENV=production npm run build-js && npm run copy-css && npm run copy-Image && npm run copy-Icon"
   },
   "repository": {
     "type": "git",
@@ -41,6 +41,7 @@
     "nodemon": "^2.0.12",
     "rimraf": "^3.0.2",
     "rollup": "^2.56.3",
+    "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-terser": "^7.0.2"
   }
 }

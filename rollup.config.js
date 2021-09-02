@@ -1,7 +1,9 @@
 import json from "@rollup/plugin-json";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
-// import { terser } from "rollup-plugin-terser";
+import { terser } from "rollup-plugin-terser";
+import bundleSize from 'rollup-plugin-bundle-size';
+
 
 export default {
     input: "src/index.js",
@@ -16,6 +18,7 @@ export default {
         json(),
         resolve(),
         commonjs(),
-        // terser()
+        process.env.NODE_ENV === 'production' && terser(),
+        bundleSize(),
     ]
 };
