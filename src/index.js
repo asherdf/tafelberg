@@ -1,4 +1,4 @@
-import { eachDayOfInterval } from 'date-fns';
+import { eachDayOfInterval, format as dateFormat } from 'date-fns';
 
 const ham = document.querySelector("#hamburger");
 
@@ -91,6 +91,8 @@ async function checkAvailability (event) {
     const departDate = new Date(document.querySelector('input[name="departure"]').value);
     const guestAmount = document.querySelector("#select-number-of-guests").value;
     const daysBetween = getDaysBetween(arriveDate, departDate);
+    const daysBetweenStrings = daysBetween.map(date => dateFormat(date, "yyyy-MM-dd"));
+    console.log(daysBetweenStrings)
 
     // Duration of the guest is staying
     const diffInDays = getNumberOfDays(arriveDate, departDate);
